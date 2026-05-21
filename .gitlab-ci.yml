@@ -1,0 +1,14 @@
+# Include the centrally managed enterprise Terraform live pipeline.
+# Load the shared live AWS pipeline from the platform-pipelines project.
+# Pin to main so live repos consume the approved platform pipeline contract.
+# Use the live AWS template, not the module template.
+# Define live-repo variables that map GitLab CI/CD values into Terraform variables.
+# Pass AWS_DEFAULT_REGION into var.aws_region for the provider block.
+
+include:
+  - project: infra_team/platform-pipelines
+    ref: main
+    file: terraform/live/aws.yml
+
+variables:
+  TF_VAR_aws_region: "$AWS_DEFAULT_REGION"
